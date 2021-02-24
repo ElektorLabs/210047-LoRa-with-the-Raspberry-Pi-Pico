@@ -1,0 +1,15 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# LM73100
+#
+DEF LM73100 IC 0 40 Y Y 1 F N
+F0 "IC" 0 0 50 H V C CNN
+F1 "LM73100" 0 0 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+ENDDRAW
+ENDDEF
+#
+#End Library

@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name RPI_Pico)(type Legacy)(uri ${KIPRJMOD}/RPI_Pico.lib)(options "")(descr ""))
+  (lib (name TI_LM3100)(type Legacy)(uri ${KIPRJMOD}/TI_LM3100.lib)(options "")(descr ""))
+  (lib (name TI_TPS25940x)(type Legacy)(uri ${KIPRJMOD}/TI_TPS25940x.lib)(options "")(descr ""))
+  (lib (name Xysemi)(type Legacy)(uri ${KIPRJMOD}/Xysemi.lib)(options "")(descr ""))
+)

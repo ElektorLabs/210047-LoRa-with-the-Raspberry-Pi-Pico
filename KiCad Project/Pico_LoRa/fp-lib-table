@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name RPi_Pico)(type KiCad)(uri ${KIPRJMOD}/RPi_Pico.pretty)(options "")(descr ""))
+  (lib (name RVC0020A_FP)(type KiCad)(uri ${KIPRJMOD}/RVC0020A_FP.pretty)(options "")(descr ""))
+  (lib (name TI_WQFN_20_EP_2.8x3.8)(type KiCad)(uri ${KIPRJMOD}/TI_WQFN_20_EP_2.8x3.8.pretty)(options "")(descr ""))
+  (lib (name XB8089D)(type KiCad)(uri ${KIPRJMOD}/XB8089D.pretty)(options "")(descr ""))
+)
