@@ -1,0 +1,263 @@
+[
+    {
+        "id": "2d641fb8.7d5238",
+        "type": "tab",
+        "label": "Demoflow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fc3d393a.6147d8",
+        "type": "mqtt in",
+        "z": "2d641fb8.7d5238",
+        "name": "TTN LoRa Data",
+        "topic": "v3/+/devices/+/up",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "4bf8fb61.8b1f9c",
+                "2f76aea1.aeb422"
+            ]
+        ]
+    },
+    {
+        "id": "4bf8fb61.8b1f9c",
+        "type": "debug",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "2f76aea1.aeb422",
+        "type": "base64",
+        "z": "2d641fb8.7d5238",
+        "name": "Decoded_Payload",
+        "action": "",
+        "property": "payload.uplink_message.frm_payload",
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "115f2fad.eebe68",
+                "b427cad7.a7e878"
+            ]
+        ]
+    },
+    {
+        "id": "115f2fad.eebe68",
+        "type": "debug",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b427cad7.a7e878",
+        "type": "function",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "func": "pl = msg.payload.uplink_message.frm_payload;\nvar datastr = String.fromCharCode.apply(null, pl);\nvar value = datastr.substring(2);\nvar payload =  value;\n//payload\nvar msg ={ payload };\nreturn msg;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "7a5a04a9.599744",
+                "2b6099a7.33b91e",
+                "543a0c60.378d04"
+            ]
+        ]
+    },
+    {
+        "id": "7a5a04a9.599744",
+        "type": "ui_chart",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "group": "772874a1.bcfe3c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 860,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b6099a7.33b91e",
+        "type": "ui_gauge",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "group": "772874a1.bcfe3c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "60",
+        "colors": [
+            "#006cb5",
+            "#e68700",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "30",
+        "x": 880,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1d9c47dc.c6a158",
+        "type": "function",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "func": "var payload =  {\"end_device_ids\":{\"device_id\":\"testdevice\",\"application_ids\":{\"application_id\":\"dummy\"},\"dev_addr\":\"000000\"},\"correlation_ids\":[\"as:up:01EZ757JMBK82FJW3HQ833A0P4\",\"ns:uplink:01EZ757JDS8MKZ6R5831CKQ2Z3\",\"pba:conn:up:01EZ4NFXVHFPFA1RJ5EF0MC1QY\",\"pba:uplink:01EZ757JAC5KE2M9R9MKR1DXMK\",\"rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01EZ757JDS35NZFY7S4X7AP5JR\",\"rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01EZ757JM94MBK0R2J44XEJ5J6\"],\"received_at\":\"2021-02-23T09:58:53.835774275Z\",\"uplink_message\":{\"f_port\":1,\"f_cnt\":38,\"frm_payload\":\"VDoyNC44NzU=\",\"rx_metadata\":[{\"gateway_ids\":{\"gateway_id\":\"packetbroker\"},\"packet_broker\":{\"message_id\":\"01EZ757JAC5KE2M9R9MKR1DXMK\",\"forwarder_net_id\":\"000013\",\"forwarder_tenant_id\":\"ttn\",\"forwarder_cluster_id\":\"ttn-v2-eu-4\",\"home_network_net_id\":\"000013\",\"home_network_tenant_id\":\"ttn\",\"home_network_cluster_id\":\"ttn-eu1\",\"hops\":[{\"received_at\":\"2021-02-23T09:58:53.516592946Z\",\"sender_address\":\"52.169.150.138\",\"receiver_name\":\"router-dataplane-76fc4fb9fd-w27bw\",\"receiver_agent\":\"pbdataplane/1.2.1 go/1.15.8 linux/amd64\"},{\"received_at\":\"2021-02-23T09:58:53.518764015Z\",\"sender_name\":\"router-dataplane-76fc4fb9fd-w27bw\",\"sender_address\":\"kafkapb://router?topic=forwarder_uplink\",\"receiver_name\":\"router-5d588c46f9-q77zl\",\"receiver_agent\":\"pbrouter/1.2.1 go/1.15.8 linux/amd64\"},{\"received_at\":\"2021-02-23T09:58:53.521933741Z\",\"sender_name\":\"router-5d588c46f9-q77zl\",\"sender_address\":\"kafkapb://ttn-eu1?topic=deliver_000013.ttn.ttn-eu1_uplink\",\"receiver_name\":\"router-dataplane-76fc4fb9fd-w27bw\",\"receiver_agent\":\"pbdataplane/1.2.1 go/1.15.8 linux/amd64\"}]},\"time\":\"2021-02-23T09:58:53.498771Z\",\"rssi\":-81,\"channel_rssi\":-81,\"snr\":10.2,\"uplink_token\":\"eyJnIjoiWlhsS2FHSkhZMmxQYVVwQ1RWUkpORkl3VGs1VE1XTnBURU5LYkdKdFRXbFBhVXBDVFZSSk5GSXdUazVKYVhkcFlWaFphVTlwU2tWVldHUldZbTVyTTFwdVFUVlJNRGxWWkVSb2RrbHBkMmxrUjBadVNXcHZhVkpxYkhCaWJWWXlZa2hPV0Zrd1NrNVpWVEZYVlZkU1FrOUdiRVJSVTBvNUxteHJja2g1VTB4SVMyNUdNMWh1VjFoeGExUlZVbEV1ZDBvMFRTMUZWV3hsVFhsM1pIQTRkaTVyVnpadWJ6TlhkMFEzVUdoQlh5MUhhRGRDUTJwS09HZFJSVTlJWDNaNU9GUTJNV0p3ZUdFMmRYWnRjMkZVWVRkNVkxVnFjV3h0Vm1zNFdHRkpiRm81TFdSUFIyOUZPWGxtUm1zNWNWaFRkSFUxZUV0d1RuQlFWREYzUVdKUGVtVk5kVVY0V0U5MWVEVjRYMFJhUWxGWUxWbFVXakEyTWxveWFuRXhhRXhXVGtGUGFVZFhaMWQzY3pjeVREQm9kVFZWUXkxWmFrUnFRakF0WDI5YVpGTnpORVpLZFU5MVp6ZFJjekZXTG1kVVEyWlpWMHBZVkVWSFZYbHRUMnc0YjNaZmFXYz0iLCJhIjp7ImZuaWQiOiIwMDAwMTMiLCJmdGlkIjoidHRuIiwiZmNpZCI6InR0bi12Mi1ldS00In19\"}],\"settings\":{\"data_rate\":{\"lora\":{\"bandwidth\":125000,\"spreading_factor\":9}},\"data_rate_index\":3,\"coding_rate\":\"4/5\",\"frequency\":\"868100000\"},\"received_at\":\"2021-02-23T09:58:53.625327479Z\",\"consumed_airtime\":\"0.185344s\"}};\n//payload\nvar msg ={ payload };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "2f76aea1.aeb422",
+                "bac37074.31a0c"
+            ]
+        ]
+    },
+    {
+        "id": "e6ef8eff.90ca5",
+        "type": "inject",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 660,
+        "wires": [
+            [
+                "1d9c47dc.c6a158"
+            ]
+        ]
+    },
+    {
+        "id": "bac37074.31a0c",
+        "type": "debug",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "543a0c60.378d04",
+        "type": "debug",
+        "z": "2d641fb8.7d5238",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "772874a1.bcfe3c",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "32253cf0.2ff314",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "32253cf0.2ff314",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
