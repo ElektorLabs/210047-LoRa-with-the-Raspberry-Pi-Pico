@@ -114,7 +114,7 @@ class uLoRa:
         """
         self._irq = machine.Pin(irq, machine.Pin.IN)
         self._cs = machine.Pin(cs, machine.Pin.OUT, value=1)
-        self._rst = machine.Pin(cs, machine.Pin.OUT, value=1)
+        self._rst = machine.Pin(rst, machine.Pin.OUT, value=1)
         # Set up SPI device on Mode 0
         self._device = machine.SPI(0,
             baudrate=4000000,
